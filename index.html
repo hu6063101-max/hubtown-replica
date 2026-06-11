@@ -11,11 +11,12 @@
 
   <link rel="stylesheet" href="css/style.css" />
 
+  <!-- 动画库改为本地加载（与网页同源，国内访问更稳，不依赖国外 CDN） -->
   <!-- GSAP 动画库 + ScrollTrigger 滚动触发插件（高保真动画的核心） -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
   <!-- Lenis 平滑滚动（还原原站丝滑的惯性滚动手感） -->
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="js/vendor/lenis.min.js" defer></script>
 
   <script src="js/main.js" defer></script>
 </head>
