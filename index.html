@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HUBTOWN — 复刻版 | Leading Real Estate Developer</title>
+  <meta name="description" content="Hubtown 官网复刻练习项目 —— 高保真还原外观与交互（仅供学习）。" />
+
+  <!-- 网站图标（占位） -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23020a19'/><rect x='12' y='12' width='8' height='8' fill='%23d5e0ff'/></svg>" />
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- GSAP 动画库 + ScrollTrigger 滚动触发插件（高保真动画的核心） -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <!-- Lenis 平滑滚动（还原原站丝滑的惯性滚动手感） -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+
+  <script src="js/main.js" defer></script>
+</head>
+
+<body>
+  <!-- ========== 自定义光标：淡蓝小方块（还原原站的 flash-square） ========== -->
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <!-- ========== 加载页：HUBTOWN 字标逐字揭示 + 0→100% 进度 ========== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__pct" id="loaderPct">0%</div>
+
+      <!-- HUBTOWN 字标：每个字母一个 span，揭示动画逐个展开 -->
+      <div class="wordmark" id="loaderWord">
+        <span>H</span><span>U</span><span>B</span><span>T</span><span>O</span><span>W</span><span>N</span>
+      </div>
+
+      <!-- 进度条 -->
+      <div class="loader__bar"><span id="loaderBarFill"></span></div>
+      <div class="loader__label">LOADING</div>
+    </div>
+  </div>
+
+  <!-- ========== 顶部导航 ========== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__logo" data-cursor>
+      <span class="wordmark wordmark--sm">HUBTOWN</span>
+    </a>
+
+    <nav class="nav__menu" id="navMenu">
+      <a href="#future" data-cursor>Future</a>
+      <a href="#innovation" data-cursor>Innovation</a>
+      <a href="#collaboration" data-cursor>Collaboration</a>
+      <a href="#excellence" data-cursor>Excellence</a>
+      <a href="#purpose" data-cursor>Purpose</a>
+      <a href="#legacy" data-cursor>Legacy</a>
+    </nav>
+
+    <a href="#" class="nav__login" data-cursor>Login</a>
+
+    <!-- 移动端汉堡按钮 -->
+    <button class="nav__burger" id="navBurger" aria-label="菜单">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <!-- ========== 开场：项目统计区 ========== -->
+    <section class="intro" id="intro">
+      <div class="intro__bg" aria-hidden="true"></div>
+
+      <div class="intro__head reveal">
+        <span class="label">Future</span>
+        <h1 class="intro__title">
+          We build the<br /><em>future</em> of real estate
+        </h1>
+      </div>
+
+      <!-- 四个区域的项目统计，数字会 count-up -->
+      <div class="stats" id="stats">
+        <div class="stat" data-count="9">
+          <span class="stat__num" data-target="9">00</span>
+          <span class="stat__name">Central Suburbs</span>
+          <span class="stat__sub">projects</span>
+        </div>
+        <div class="stat" data-count="12">
+          <span class="stat__num" data-target="12">00</span>
+          <span class="stat__name">South Mumbai</span>
+          <span class="stat__sub">projects</span>
+        </div>
+        <div class="stat" data-count="18">
+          <span class="stat__num" data-target="18">00</span>
+          <span class="stat__name">Western Suburbs</span>
+          <span class="stat__sub">projects</span>
+        </div>
+        <div class="stat" data-count="6">
+          <span class="stat__num" data-target="6">00</span>
+          <span class="stat__name">Thane</span>
+          <span class="stat__sub">projects</span>
+        </div>
+      </div>
+
+      <div class="intro__scrollcue reveal">
+        <span>Scroll</span>
+        <span class="intro__scrollcue-line"></span>
+      </div>
+    </section>
+
+    <!-- ========== 6 大滚动叙事板块 ==========
+         每个 .story 高度 300vh，内部 .story__stage 被钉住(pin)，
+         随滚动进度播放文字入场/出场 + 背景视差。 -->
+
+    <!-- 1. Future -->
+    <section class="story" id="future" data-bg="future">
+      <div class="story__stage">
+        <div class="story__visual" data-visual="future" aria-hidden="true"></div>
+        <div class="story__content">
+          <span class="label">Future</span>
+          <h2 class="story__title">We build the future of real estate</h2>
+          <p class="story__text">
+            For over 40 years, Hubtown has created some of India's most innovative
+            real estate developments, spanning across Residential, Commercial and
+            Industrial projects. From the drawing board to reality, across all facets
+            of society.
+          </p>
+          <a href="#map" class="btn" data-cursor><span>Explore the project map</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Innovation -->
+    <section class="story" id="innovation" data-bg="innovation">
+      <div class="story__stage">
+        <div class="story__visual" data-visual="innovation" aria-hidden="true"></div>
+        <div class="story__content">
+          <span class="label">Innovation</span>
+          <h2 class="story__title">We lead the way in development</h2>
+          <p class="story__text">
+            At Hubtown we look at the world through a different lens; instead of seeing
+            what is, we see what could be. Each day we seek better ways to design, build
+            and create communities.
+          </p>
+          <a href="#careers" class="btn" data-cursor><span>Explore careers</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Collaboration -->
+    <section class="story" id="collaboration" data-bg="collaboration">
+      <div class="story__stage">
+        <div class="story__visual" data-visual="collaboration" aria-hidden="true"></div>
+        <div class="story__content">
+          <span class="label">Collaboration</span>
+          <h2 class="story__title">We work with a network of experts</h2>
+          <p class="story__text">
+            We are not just real estate developers. We are inventors, architects,
+            engineers, designers, city planners, safety experts, artists… All coming
+            together to shape the future, for you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Excellence -->
+    <section class="story" id="excellence" data-bg="excellence">
+      <div class="story__stage">
+        <div class="story__visual" data-visual="excellence" aria-hidden="true"></div>
+        <div class="story__content">
+          <span class="label">Excellence</span>
+          <h2 class="story__title">To build what others can only imagine</h2>
+          <p class="story__text">
+            We work with experts from all over the world, because there is always
+            something to learn. We aim higher, dream bigger and create better. Always.
+          </p>
+          <a href="#vision" class="btn" data-cursor><span>Discover our vision</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Purpose -->
+    <section class="story" id="purpose" data-bg="purpose">
+      <div class="story__stage">
+        <div class="story__visual" data-visual="purpose" aria-hidden="true"></div>
+        <div class="story__content">
+          <span class="label">Purpose</span>
+          <h2 class="story__title">Shape the land with purpose</h2>
+          <p class="story__text">
+            In an ever changing world with increasingly limited resources, we believe
+            it essential to not only build well, but with vision, intention - and purpose.
+            We build to last.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Legacy -->
+    <section class="story" id="legacy" data-bg="legacy">
+      <div class="story__stage">
+        <div class="story__visual" data-visual="legacy" aria-hidden="true"></div>
+        <div class="story__content">
+          <span class="label">Legacy</span>
+          <h2 class="story__title">And define tomorrow's landscape</h2>
+          <p class="story__text">
+            Join us as we continue to shape tomorrow, creating formidable communities,
+            enduring experiences, and places of exceptional value.
+          </p>
+          <a href="#projects" class="btn" data-cursor><span>Explore our projects</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Sound Off 轮播 ========== -->
+    <section class="soundoff" id="soundoff">
+      <div class="soundoff__head">
+        <span class="label">Sound Off</span>
+      </div>
+
+      <div class="carousel" id="carousel">
+        <div class="carousel__track" id="carouselTrack">
+          <!-- 5 张幻灯片 -->
+          <figure class="slide" data-slide="0">
+            <div class="slide__visual" data-visual="future"></div>
+            <figcaption>
+              <span class="slide__idx">01</span>
+              <h3>Rising Mumbai</h3>
+              <p>Redefining the city skyline with vertical communities.</p>
+            </figcaption>
+          </figure>
+          <figure class="slide" data-slide="1">
+            <div class="slide__visual" data-visual="innovation"></div>
+            <figcaption>
+              <span class="slide__idx">02</span>
+              <h3>The Drawing Board</h3>
+              <p>Where ambitious ideas become enduring landmarks.</p>
+            </figcaption>
+          </figure>
+          <figure class="slide" data-slide="2">
+            <div class="slide__visual" data-visual="excellence"></div>
+            <figcaption>
+              <span class="slide__idx">03</span>
+              <h3>Crafted to Last</h3>
+              <p>Materials, detail and care that stand the test of time.</p>
+            </figcaption>
+          </figure>
+          <figure class="slide" data-slide="3">
+            <div class="slide__visual" data-visual="purpose"></div>
+            <figcaption>
+              <span class="slide__idx">04</span>
+              <h3>Living Landscapes</h3>
+              <p>Green, open and human-centric urban environments.</p>
+            </figcaption>
+          </figure>
+          <figure class="slide" data-slide="4">
+            <div class="slide__visual" data-visual="legacy"></div>
+            <figcaption>
+              <span class="slide__idx">05</span>
+              <h3>Tomorrow, Today</h3>
+              <p>Communities designed for the generations to come.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="carousel__nav">
+        <button class="carousel__btn" id="prevBtn" data-cursor>Prev.</button>
+        <div class="carousel__dots" id="carouselDots"></div>
+        <button class="carousel__btn" id="nextBtn" data-cursor>Next</button>
+      </div>
+    </section>
+
+    <!-- ========== 页脚 ========== -->
+    <footer class="footer" id="footer">
+      <div class="footer__top">
+        <div class="wordmark wordmark--xl">HUBTOWN</div>
+      </div>
+
+      <div class="footer__grid">
+        <div class="footer__col">
+          <span class="label">Explore</span>
+          <a href="#future" data-cursor>Future</a>
+          <a href="#innovation" data-cursor>Innovation</a>
+          <a href="#collaboration" data-cursor>Collaboration</a>
+          <a href="#legacy" data-cursor>Legacy</a>
+        </div>
+        <div class="footer__col">
+          <span class="label">Company</span>
+          <a href="#" data-cursor>About</a>
+          <a href="#" data-cursor>Careers</a>
+          <a href="#" data-cursor>Press</a>
+          <a href="#" data-cursor>Contact</a>
+        </div>
+        <div class="footer__col">
+          <span class="label">Connect</span>
+          <a href="#" data-cursor>Instagram</a>
+          <a href="#" data-cursor>LinkedIn</a>
+          <a href="#" data-cursor>YouTube</a>
+        </div>
+        <div class="footer__col footer__col--addr">
+          <span class="label">Office</span>
+          <p>Hubtown Solaris, N. S. Phadke Marg,<br />Andheri (East), Mumbai 400069</p>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2026 复刻练习项目 · 非官方 · 仅供学习</span>
+        <span>Built with HTML · CSS · GSAP</span>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========== 右下角 WhatsApp 浮动按钮 ========== -->
+  <a href="#" class="whatsapp" id="whatsapp" data-cursor aria-label="Chat with us">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.27.86 5.82 2.42a8.2 8.2 0 0 1 2.42 5.82c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24zm-2.84 4.4c-.21 0-.55.08-.84.4-.29.32-1.1 1.08-1.1 2.63s1.13 3.05 1.29 3.26c.16.21 2.2 3.36 5.33 4.59 2.6 1.02 3.13.82 3.7.77.57-.05 1.84-.75 2.1-1.48.26-.73.26-1.35.18-1.48-.08-.13-.29-.21-.6-.37-.31-.16-1.84-.91-2.13-1.01-.29-.11-.5-.16-.71.16-.21.32-.81 1.01-1 1.22-.18.21-.37.24-.68.08-.31-.16-1.31-.48-2.5-1.54-.92-.82-1.55-1.84-1.73-2.15-.18-.32-.02-.49.14-.64.14-.14.31-.37.47-.55.16-.18.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.71-1.72-.98-2.35-.26-.62-.52-.54-.71-.55h-.6z"/>
+    </svg>
+    <span>Chat with us</span>
+  </a>
+</body>
+</html>
